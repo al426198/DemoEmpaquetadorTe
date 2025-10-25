@@ -2,18 +2,20 @@ package paquetes;
 
 public abstract class PaqueteTe implements Paquete {
     private final int cantidad;
+    private final String tipo;
 
-    public PaqueteTe(int cantidad) {
+    public PaqueteTe(int cantidad, String tipo) {
         this.cantidad = cantidad;
-    }
-
-    @Override
-    public String muestraContenido() {
-        return "Este paquete tiene " + cantidad + " unidades";
+        this.tipo = tipo;
     }
 
     @Override
     public int getCantidad() {
         return cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Te " + tipo;
     }
 }

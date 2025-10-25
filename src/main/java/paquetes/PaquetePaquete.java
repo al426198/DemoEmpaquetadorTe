@@ -2,6 +2,7 @@ package paquetes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PaquetePaquete implements Paquete {
     private final List<Paquete> paquetes;
@@ -10,12 +11,23 @@ public class PaquetePaquete implements Paquete {
         paquetes = new ArrayList<>();
     }
 
+    // Crea paquetes de forma compacta
+    // Se podría aplicar Factory en el futuro para gestionar la creación de paquetes
+    // (no se utiliza en la demo por conveniencia, pero sería útil)
+    public PaquetePaquete(Map<String, Integer> envio) {
+        paquetes = new ArrayList<>();
+        envio.forEach((k, v) -> {
+            for (int i = 0; i < v; i++) {
+                paquetes.add(k.equals("Te Blanco") ? new PaqueteTeBlanco() : new PaqueteTeVerde());
+            }
+        });
+    }
+
     public List<Paquete> getPaquetes() {
         return paquetes;
     }
 
     public void anyadePaquete(Paquete p) {
-        System.out.println("Añado una caja de " + p.toString());
         paquetes.add(p);
     }
 
@@ -25,12 +37,11 @@ public class PaquetePaquete implements Paquete {
 
     @Override
     public int getCantidad() {
-        int cantidad = 0;
-        for (Paquete paquete : paquetes) {
-            cantidad += paquete.getCantidad();
-        }
-        System.out.println("Este paquete consta de " + cantidad + " unidades");
-        return cantidad;
+        return paquetes.stream().map(Paquete::getCantidad).reduce(0, Integer::sum);
+    }
+
+    public String mostrarContenido() {
+        return "Este paquete consta de " + getCantidad() + " unidades";
     }
 
     @Override
@@ -38,12 +49,4 @@ public class PaquetePaquete implements Paquete {
         return "Paquete de cajas";
     }
 
-    @Override
-    public String muestraContenido() {
-        StringBuilder sb = new StringBuilder();
-        for (Paquete paquete : paquetes) {
-            sb.append(paquete.muestraContenido()).append("\n");
-        }
-        return sb.toString();
-    }
 }
