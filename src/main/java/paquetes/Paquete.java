@@ -1,5 +1,6 @@
 package paquetes;
 
-public interface Paquete {
+interface Paquete {
     int getCantidad();
 }
+
