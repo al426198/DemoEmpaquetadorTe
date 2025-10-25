@@ -4,3 +4,5 @@ Trabajamos en una empresa de venta de Té Blanco y Té Verde por cajas. Una caja
 ## Utiliza los patrones:
 - Composite
 - Decorator
+
+``` Compatible con Java 21+. ```
