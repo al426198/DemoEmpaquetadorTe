@@ -40,13 +40,8 @@ public class PaquetePaquete implements Paquete {
         return paquetes.stream().map(Paquete::getCantidad).reduce(0, Integer::sum);
     }
 
-    public String mostrarContenido() {
-        return "Este paquete consta de " + getCantidad() + " unidades";
-    }
-
     @Override
     public String toString() {
         return "Paquete de cajas";
     }
-
 }
